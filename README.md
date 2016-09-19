@@ -30,7 +30,7 @@ Copyright@John J. Oh
   - mkcache.py     # Extracting Data from iKAGRA data path
   - Channel Files: K1_KAGRA.DQ.Channel.IMC.PSL, K1_KAGRA.DQ.Channel.LSC, K1_KAGRA.DQ.Channel.PEM, K1_KAGRA.DQ.Channel.VIS  # Auxiliary Channel File List
 
-+ Download: GIT repository
++ Download: https://github.com/gw-analysis/CAGMon.git
 
 + Environment Setting for PyLAL and LALSuite
   # source /home/johnoh/.local/etc/lscsoftrc
