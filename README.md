@@ -18,7 +18,7 @@ Copyright@John J. Oh
  - glue
  - and other dependencies
 
-+ Code Location: seikai.icrr.u-tokyo.ac.jp:/johnoh/CAGMon/
++ Code Contents
   - CAGConfig.ini # Configuration setting
   - CAGMonLK.py   # Main CAGMon Code -- computing correlation values and plotting
   - CAGMkSh.py    # Generating shell script for multi-jobs (serial)
