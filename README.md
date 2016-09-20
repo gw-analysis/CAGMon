@@ -20,6 +20,7 @@ Copyright@John J. Oh
  - matplotlib
  - pylal
  - glue
+ - and other dependencies
 
 + Code Location: seikai.icrr.u-tokyo.ac.jp:/johnoh/CAGMon/
   - CAGConfig.ini # Configuration setting
