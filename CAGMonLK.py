@@ -73,7 +73,15 @@ TimeStride=opts.time_stride
 RunData=opts.run_data
 dur=int(etime)-int(stime)
 
-Dir=RunData+'.'+gstart+'.'+str(gdur)+'.'+SamRate+'.'+str(TimeStride)
+ResDir="../public_html"
+
+if isdir(ResDir):
+    print "Directory exists:", ResDir
+else:
+    print "Creating directory", ResDir
+    makedirs(ResDir)
+
+Dir=ResDir+'/'+RunData+'.'+gstart+'.'+str(gdur)+'.'+SamRate+'.'+str(TimeStride)
 
 if isdir(Dir):
     print "Directory exists:", Dir
