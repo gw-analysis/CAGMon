@@ -18,7 +18,7 @@
 #############################################################################                                                         
               
 """
-CAGMkSub - Generating a sub-file for HTC Condor to compute CAGMon
+CAGMkSub - Generating a one-shot build shell script to compute CAGMon
 """
 __author__ ="John J. Oh <john.oh@ligo.org>"
 #__version__ = git_version.id                                                                                                         
@@ -64,8 +64,9 @@ for chl in chlist:
         f.write(CMD+'\n')
         f.write('\n')
         f.close()
+print 'Writing Web-builder for Result Page'
 f=open(base_tag+'.sh','a')
-f.write("python CAGWebBuild.py\n")
+f.write(" python CAGWebBuild.py\n")
 f.close()
 
 CMODE=" chmod a+x "+base_tag+'.sh'
