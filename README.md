@@ -32,24 +32,24 @@ Copyright@John J. Oh
  - $ cd CAGMon
 
 + Environment Setting for PyLAL and LALSuite
-  -$ source /home/johnoh/.local/etc/lscsoftrc
+ -$ source /home/johnoh/.local/etc/lscsoftrc
 
 + Instruction: 
  o Shell Script Seirial Job Submission
- - Preparing Auxiliary Channel List:
+  - Preparing Auxiliary Channel List:
    * Each list file divided by at least one '_', 
     - ex) K1_KAGRA.DQ.Channel.LSC
    * There are four files containing channel names : IMC.PSL, LSC, PEM, VIS
- - Modifying Configuration file:
+  - Modifying Configuration file:
    * Open "CAGConfig.ini" file and setting up appropriately
- - Creating .sh file:
+  - Creating .sh file:
    * Just executing "./CAGMkSh.py" 
- - Run Shell Script with "CAGMonLK.[gps_start].[dur].[stride].[freq].sh"
- - Then the result has been stored in your "$HOME/public_html" directory.
+  - Run Shell Script with "CAGMonLK.[gps_start].[dur].[stride].[freq].sh"
+  - Then the result has been stored in your "$HOME/public_html" directory.
 
  o Single job running
- - $ python CAGMonLK.py -t [start-gps] -e [end-gps] -o [ifo / L H K ] -r [DataType/ ER8, O1, iKAGRA] -c [ChannelList File_Divided by '-'] -t [time stride] -f [resampled frequency]
-   - ex) python CAGMonLK.py -t 1145621579 -e 1145621609 -o K -r iKAGRA -c K1_KAGRA.DQ.Channel.LSC -t 1.0 -f 1024
+  - $ python CAGMonLK.py -t [start-gps] -e [end-gps] -o [ifo / L H K ] -r [DataType/ ER8, O1, iKAGRA] -c [ChannelList File_Divided by '-'] -t [time stride] -f [resampled frequency]
+  - ex) python CAGMonLK.py -t 1145621579 -e 1145621609 -o K -r iKAGRA -c K1_KAGRA.DQ.Channel.LSC -t 1.0 -f 1024
 
 + Help
  - $ python CAGMonLK.py --help
