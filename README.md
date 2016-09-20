@@ -52,7 +52,7 @@ Copyright@John J. Oh
    - ex) python CAGMonLK.py -t 1145621579 -e 1145621609 -o K -r iKAGRA -c K1_KAGRA.DQ.Channel.LSC -t 1.0 -f 1024
 
 + Help
-- $ python CAGMonLK.py --help
+ - $ python CAGMonLK.py --help
 
 
 
