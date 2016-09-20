@@ -28,11 +28,11 @@ Copyright@John J. Oh
   - Channel Files: K1_KAGRA.DQ.Channel.IMC.PSL, K1_KAGRA.DQ.Channel.LSC, K1_KAGRA.DQ.Channel.PEM, K1_KAGRA.DQ.Channel.VIS  # Auxiliary Channel File List
 
 + Download: https://github.com/gw-analysis/CAGMon.git or ssh://git@github.com/gw-analysis/CAGMon.git
-  # git clone https://github.com/gw-analysis/CAGMon.git
-  # cd CAGMon
+  $ git clone https://github.com/gw-analysis/CAGMon.git
+  $ cd CAGMon
 
 + Environment Setting for PyLAL and LALSuite
-  # source /home/johnoh/.local/etc/lscsoftrc
+  $ source /home/johnoh/.local/etc/lscsoftrc
 
 + Instruction: 
  o Shell Script Seirial Job Submission
