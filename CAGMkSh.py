@@ -61,17 +61,13 @@ for chl in chlist:
         tag=base_tag+'.'+chl
         CMD=" python "+BaseDir+"CAGMonLK.py -s "+str(stime+SegTime*i)+" -e "+str(stime+SegTime*(i+1))+" -o "+runs+" -r "+datype+" -c "+BaseDir+chl+" -f "+str(srate)+" -t "+str(stride)
         f=open(base_tag+'.sh','a')
-#        f.write('universe = vanilla\n')
-#        f.write('executable = /usr/bin/env\n')
         f.write(CMD+'\n')
-#        f.write('environment = KMP_LIBRARY=serial;MKL_SERIAL=yes\n')
-#        f.write('getenv = true\n')
-#        f.write('log = '+logdir+'/'+tag+'.log\n')
-#        f.write('error = '+logdir+'/'+tag+'.err\n')
-#        f.write('output = '+logdir+'/'+tag+'.out\n')
-#        f.write('queue 1\n')
         f.write('\n')
         f.close()
+f=open(base_tag+'.sh','a')
+f.write("python CAGWebBuild.py\n")
+f.close()
+
 CMODE=" chmod a+x "+base_tag+'.sh'
 os.system(CMODE)
 
