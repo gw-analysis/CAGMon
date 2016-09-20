@@ -271,7 +271,7 @@ for mla in [['MIC',MicMat], ['PCC', PccMat], ['Ktau',KtauMat]]:
     ax.set_yticklabels(row_labels, minor=False, fontsize=3)
     ax.set_xticklabels(column_labels, minor=False, fontsize=3)
 
-    fig.savefig(ChanDir+'/'+'CMatrix_'+mla[0]+'.'+RunData+'.'+str(stime)+'.'+str(dur)+'.'+str(TStride)+'.'+str(SamRate)+'.png',dpi=128)
+    fig.savefig(ChanDir+'/'+'CMatrix_'+mla[0]+'.'+RunData+'.'+str(stime)+'.'+str(dur)+'.'+str(TStride)+'.'+str(SamRate)+'.png',dpi=256)
 
 #############################################################
 #                                                           #
