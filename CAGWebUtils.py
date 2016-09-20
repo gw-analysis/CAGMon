@@ -10,7 +10,7 @@ class PNGList:
         return self.list
 
 def CAGHeader(gps_start, gps_end, dur, srate, stride, run, Nseg, chlist):
-    BaseDir=run+'.'+str(gps_start)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)
+    BaseDir='../public_html/'+run+'.'+str(gps_start)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)
     header = """
 <html>
 <head>                                                                                                                           
@@ -44,7 +44,7 @@ def CAGHeader(gps_start, gps_end, dur, srate, stride, run, Nseg, chlist):
 
 
 def CAGBody(gps_start, dur, srate, stride, Nseg, run, chlist, filename):
-    BaseDir=run+'.'+str(gps_start)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)
+    BaseDir='../public_html/'+run+'.'+str(gps_start)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)
     meth=['PCC', 'MIC', 'Ktau']
     for m in chlist:
         chname=m.split('_')[1]
@@ -173,7 +173,7 @@ def CAGBody(gps_start, dur, srate, stride, Nseg, run, chlist, filename):
 def CAGFoot(gps_start, dur, srate, stride, run, filename, chlist):
     for m in chlist:
         chname=m.split('_')[1]
-        BaseDir=run+'.'+str(gps_start)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)
+        BaseDir='../public_html/'+run+'.'+str(gps_start)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)
         Foot="""
 </body>
 <hr>
