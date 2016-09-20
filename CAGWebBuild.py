@@ -16,9 +16,12 @@ chlist=ast.literal_eval(config.get('Parameter','chlist'))
 Nseg=int(config.get('Parameter','Nseg'))
 dur=str(etime-stime)
 
+print 'Generating HTML result page...'
 filename=CAGHeader(stime, etime, dur, srate, stride, datype, Nseg, chlist)
 CAGBody(stime, dur, srate, stride, Nseg, datype, chlist, filename)
 CAGFoot(stime, dur, srate, stride, datype, filename, chlist)
+
+print 'All Processes Done.'
 
 
 
