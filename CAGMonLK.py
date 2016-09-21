@@ -183,60 +183,60 @@ for i in range(len(AuxChan)):
             HoftResamp=seriesutils.resample(HoftData, float(AuxChan[i][1]), inplace=True)
             SRate=int(AuxChan[i][1])
     ### Time Split by Stride ###
-    TStride=TimeStride # sec#
-    Nseg=int(dur/TStride)
-    Npsec=int(SRate*TStride)
-    for j in range(Nseg):
+        TStride=TimeStride # sec#
+        Nseg=int(dur/TStride)
+        Npsec=int(SRate*TStride)
+        for j in range(Nseg):
     ### Computing MIC, Abs-PearsonR, and Abs-Kendall Tau Scores ###
-        print 'Computing MIC ...'
+            print 'Computing MIC ...'
 #        mine=MINE(alpha=0.6, c=15, est="mic_approx")
-        mine=MINE(alpha=0.6, c=15)
-        mine.compute_score(AuxResamp.data.data[Npsec*j:Npsec*(j+1)], HoftResamp.data.data[Npsec*j:Npsec*(j+1)])
-        MicVal=mine.mic()
-        print 'MIC:', MicVal
-        print 'Recording results...'
-        f=open(ChanDir+'/'+'Correlation.Result.MIC'+'.'+str(stime)+'.'+str(dur)+'.'+RunData+'.'+str(TStride)+'.'+str(SamRate)+'.txt','a')
-        f.write(str(MicVal))
-        if j==Nseg-1:
-            f.write('\n')
-        else:
-            f.write(' ')
-        f.close()
-        print 'Computing PearsonR ...'
-        PccVal=np.nan_to_num(abs(pearsonr(AuxResamp.data.data[Npsec*j:Npsec*(j+1)], HoftResamp.data.data[Npsec*j:Npsec*(j+1)])[0]))
-        print 'PearsonR:', PccVal
-        print 'Recording results...'
-        f=open(ChanDir+'/'+'Correlation.Result.PCC'+'.'+str(stime)+'.'+str(dur)+'.'+RunData+'.'+str(TStride)+'.'+str(SamRate)+'.txt','a')
-        f.write(str(PccVal))
-        if j==Nseg-1:
-            f.write('\n')
-        else:
-            f.write(' ')
-        f.close()
-        print 'Computing Kendall Tau ...'
-        KtauVal=np.nan_to_num(abs(kendalltau(AuxResamp.data.data[Npsec*j:Npsec*(j+1)], HoftResamp.data.data[Npsec*j:Npsec*(j+1)])[0]))
-        print 'Kendall tau:', KtauVal
-        print 'Recording results...'
-        f=open(ChanDir+'/'+'Correlation.Result.Ktau'+'.'+str(stime)+'.'+str(dur)+'.'+RunData+'.'+str(TStride)+'.'+str(SamRate)+'.txt','a')
-        f.write(str(KtauVal))
-        if j==Nseg-1:
-            f.write('\n')
-        else:
-            f.write(' ')
-        f.close()
+            mine=MINE(alpha=0.6, c=15)
+            mine.compute_score(AuxResamp.data.data[Npsec*j:Npsec*(j+1)], HoftResamp.data.data[Npsec*j:Npsec*(j+1)])
+            MicVal=mine.mic()
+            print 'MIC:', MicVal
+            print 'Recording results...'
+            f=open(ChanDir+'/'+'Correlation.Result.MIC'+'.'+str(stime)+'.'+str(dur)+'.'+RunData+'.'+str(TStride)+'.'+str(SamRate)+'.txt','a')
+            f.write(str(MicVal))
+            if j==Nseg-1:
+                f.write('\n')
+            else:
+                f.write(' ')
+            f.close()
+            print 'Computing PearsonR ...'
+            PccVal=np.nan_to_num(abs(pearsonr(AuxResamp.data.data[Npsec*j:Npsec*(j+1)], HoftResamp.data.data[Npsec*j:Npsec*(j+1)])[0]))
+            print 'PearsonR:', PccVal
+            print 'Recording results...'
+            f=open(ChanDir+'/'+'Correlation.Result.PCC'+'.'+str(stime)+'.'+str(dur)+'.'+RunData+'.'+str(TStride)+'.'+str(SamRate)+'.txt','a')
+            f.write(str(PccVal))
+            if j==Nseg-1:
+                f.write('\n')
+            else:
+                f.write(' ')
+            f.close()
+            print 'Computing Kendall Tau ...'
+            KtauVal=np.nan_to_num(abs(kendalltau(AuxResamp.data.data[Npsec*j:Npsec*(j+1)], HoftResamp.data.data[Npsec*j:Npsec*(j+1)])[0]))
+            print 'Kendall tau:', KtauVal
+            print 'Recording results...'
+            f=open(ChanDir+'/'+'Correlation.Result.Ktau'+'.'+str(stime)+'.'+str(dur)+'.'+RunData+'.'+str(TStride)+'.'+str(SamRate)+'.txt','a')
+            f.write(str(KtauVal))
+            if j==Nseg-1:
+                f.write('\n')
+            else:
+                f.write(' ')
+            f.close()
 
     ##########################
     # Drawing Scattered Plot #
     ##########################
-    print 'Drawing scattered plot...'
-    fig, ax=plt.subplots()
-    AuxRescal=AuxResamp.data.data/np.median(AuxResamp.data.data)
-    HoftRescal=HoftResamp.data.data/np.median(HoftResamp.data.data)
-    fig=plt.scatter(AuxRescal, HoftRescal, c='r', s=10, lw=0, alpha=0.8)
-    ax.set_xlabel(AuxChan[i][0])
-    ax.set_ylabel(GWChan)
-    ax.set_title('Scattered Plot between Two Channels_'+RunData+'.'+stime+'.'+str(dur))
-    plt.savefig(ChanDir+'/'+'Scatter.Plot.'+stime+'.'+str(dur)+'.'+AuxChan[i][0]+'.'+RunData+'.'+str(TStride)+'.'+str(SamRate)+'.png')
+            print 'Drawing scattered plot...'
+            fig, ax=plt.subplots()
+            AuxRescal=AuxResamp.data.data/np.median(AuxResamp.data.data)
+            HoftRescal=HoftResamp.data.data/np.median(HoftResamp.data.data)
+            fig=plt.scatter(AuxRescal, HoftRescal, c='r', s=10, lw=0, alpha=0.8)
+            ax.set_xlabel(AuxChan[i][0])
+            ax.set_ylabel(GWChan)
+            ax.set_title('Scattered Plot between Two Channels_'+RunData+'.'+stime+'.'+str(dur))
+            plt.savefig(ChanDir+'/'+'Scatter.Plot.'+stime+'.'+str(dur)+'.'+AuxChan[i][0]+'.'+RunData+'.'+str(TStride)+'.'+str(SamRate)+'.png')
 
 ########################################################
 #
