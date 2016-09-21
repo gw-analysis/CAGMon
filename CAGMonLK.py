@@ -157,26 +157,31 @@ AuxChan=np.loadtxt(ChanList,dtype=np.str).tolist()
 for i in range(len(AuxChan)):
     print 'Channel No. %s' % (i+1)
     print 'Extracting data and resampling for Aux Channel: ' + AuxChan[i][0]
-    if obs=='K':
-        HoftData=seriesutils.fromlalcache(CacheDir+'/'+CacheFile, GWChan, lal.LIGOTimeGPS(stime), dur)
-        AuxData=seriesutils.fromlalcache(CacheDir+'/'+CacheFile,AuxChan[i][0], lal.LIGOTimeGPS(stime), dur)
+    try:
+        if obs=='K':
+            HoftData=seriesutils.fromlalcache(CacheDir+'/'+CacheFile, GWChan, lal.LIGOTimeGPS(stime), dur)
+            AuxData=seriesutils.fromlalcache(CacheDir+'/'+CacheFile,AuxChan[i][0], lal.LIGOTimeGPS(stime), dur)
+        else:
+            HoftData=seriesutils.fromlalcache(CacheDir+'/'+HoftCacheFile, GWChan, lal.LIGOTimeGPS(stime), dur)
+            AuxData=seriesutils.fromlalcache(CacheDir+'/'+AuxCacheFile,AuxChan[i][0], lal.LIGOTimeGPS(stime), dur)
+    except RuntimeError:
+        print 'No such channel data in the data. Passed.'
+        pass
     else:
-        HoftData=seriesutils.fromlalcache(CacheDir+'/'+HoftCacheFile, GWChan, lal.LIGOTimeGPS(stime), dur)
-        AuxData=seriesutils.fromlalcache(CacheDir+'/'+AuxCacheFile,AuxChan[i][0], lal.LIGOTimeGPS(stime), dur)
-    ###############################################################################################
-    # * Resampling Data:                                                                          #
-    # When the sampling rate of Aux. channel is greater than or equal to Sam. Threshold (SamRate) #
-    # then the data shold be down-sampled to SamRate while when it is less than "SamRate", then   #
-    # the data should be down-sampled to the sampling rate of Aux Channel.                        #
-    ###############################################################################################
-    if int(AuxChan[i][1]) >= int(SamRate):
-        AuxResamp=seriesutils.resample(AuxData, float(SamRate), inplace=True)
-        HoftResamp=seriesutils.resample(HoftData, float(SamRate), inplace=True)
-        SRate=int(SamRate)
-    else:
-        AuxResamp=AuxData
-        HoftResamp=seriesutils.resample(HoftData, float(AuxChan[i][1]), inplace=True)
-        SRate=int(AuxChan[i][1])
+    ###############################################################################################                                                  
+    # * Resampling Data:                                                                          #                                                  
+    # When the sampling rate of Aux. channel is greater than or equal to Sam. Threshold (SamRate) #                                                  
+    # then the data shold be down-sampled to SamRate while when it is less than "SamRate", then   #                                                  
+    # the data should be down-sampled to the sampling rate of Aux Channel.                        #                                                  
+    ###############################################################################################                                                  
+        if int(AuxChan[i][1]) >= int(SamRate):
+            AuxResamp=seriesutils.resample(AuxData, float(SamRate), inplace=True)
+            HoftResamp=seriesutils.resample(HoftData, float(SamRate), inplace=True)
+            SRate=int(SamRate)
+        else:
+            AuxResamp=AuxData
+            HoftResamp=seriesutils.resample(HoftData, float(AuxChan[i][1]), inplace=True)
+            SRate=int(AuxChan[i][1])
     ### Time Split by Stride ###
     TStride=TimeStride # sec#
     Nseg=int(dur/TStride)
