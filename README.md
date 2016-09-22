@@ -28,7 +28,7 @@ Copyright@John J. Oh
   - Channel Files: K1_KAGRA.DQ.Channel.IMC.PSL, K1_KAGRA.DQ.Channel.LSC, K1_KAGRA.DQ.Channel.PEM, K1_KAGRA.DQ.Channel.VIS  # Auxiliary Channel File List
 
 + Download: https://github.com/gw-analysis/CAGMon.git or ssh://git@github.com/gw-analysis/CAGMon.git
- - $ git clone https://github.com/gw-analysis/CAGMon.git
+ - $ git clone ssh://git@github.com/gw-analysis/CAGMon.git
  - $ cd CAGMon
 
 + Environment Setting for PyLAL and LALSuite
@@ -48,7 +48,9 @@ Copyright@John J. Oh
     * Just executing "./CAGMkSh.py" 
   - Run Shell Script with "CAGMonLK.[gps_start].[dur].[stride].[freq].sh"
   - Then the result has been stored in your "$HOME/public_html" directory.
-
+  - After finishing all runs, then
+    * $ python MainWebBuild.py
+    will get you the "index.html" page in your "public_html/"directory.
  o Single Job Running:
   - $ python CAGMonLK.py -t [start-gps] -e [end-gps] -o [ifo / L H K ] -r [DataType/ ER8, O1, iKAGRA] -c [ChannelList File_Divided by '-'] -t [time stride] -f [resampled frequency]
     * ex) python CAGMonLK.py -t 1145621579 -e 1145621609 -o K -r iKAGRA -c K1_KAGRA.DQ.Channel.LSC -t 1.0 -f 1024
