@@ -32,7 +32,7 @@ def CAGHeader(chlist):
 <h4 align="center">Contact Email: <a href="mailto:johnoh@nims.re.kr">johnoh@nims.re.kr</a></h4>
 <h4 align="center">iKAGRA Runs: 1142899217-1143446417 (1st) / 1144368017-1145606417 (2nd)</h4>
 <h4 align="center">Code: <a href="https://github.com/gw-analysis/CAGMon.git">https://github.com/gw-analysis/CAGMon.git</a></h4>
-<p align="center">| DQ.Channel Info. |<a href="%s"> %s </a>|<a href="%s"> %s</a> |<a href="%s.txt"> %s</a> |<a href="%s.txt"> %s</a> |</p>
+<p align="center">| DQ.Channel Info. |<a href="%s.txt"> %s </a>|<a href="%s.txt"> %s</a> |<a href="%s.txt"> %s</a> |<a href="%s.txt"> %s</a> |</p>
 <hr>                                                                                                                              
 """
     filename ='index'
