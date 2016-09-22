@@ -45,15 +45,16 @@ from glue import lal
 import matplotlib.pyplot as plt
 from pylab import *
 import matplotlib as mpl
+from os import listdir
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 matplotlib.rcParams['text.usetex']=False
 matplotlib.rcParams['text.latex.unicode']=False
 import ConfigParser
 config=ConfigParser.ConfigParser()
-config.read("CAGConfig.ini")
-gstart=config.get('Parameter','start_time')
-gend=config.get('Parameter','end_time')
-gdur=int(gend)-int(gstart)
+#config.read("CAGConfig.ini")
+#gstart=config.get('Parameter','start_time')
+#gend=config.get('Parameter','end_time')
+#gdur=int(gend)-int(gstart)
 
 parser=OptionParser(usage="CAGMon", version="2.0")
 parser.add_option("-s", "--gps-start-time", action="store", type="int", default="00000", help="start gps time")
@@ -73,6 +74,16 @@ TimeStride=opts.time_stride
 RunData=opts.run_data
 dur=int(etime)-int(stime)
 
+tmpdir='tmp'
+for i in range(len(listdir(tmpdir))):
+    gstart=int(listdir(tmpdir)[i].split('.')[1])
+    gdur=int(listdir(tmpdir)[i].split('.')[2])
+    gend=int(gstart+gdur)
+    if gstart <= stime and gend >= etime:
+        config.read(listdir(tmpdir)[i])
+    else:
+        pass
+
 ResDir="../public_html"
 
 if isdir(ResDir):
@@ -81,7 +92,7 @@ else:
     print "Creating directory", ResDir
     makedirs(ResDir)
 
-Dir=ResDir+'/'+RunData+'.'+gstart+'.'+str(gdur)+'.'+SamRate+'.'+str(TimeStride)
+Dir=ResDir+'/'+RunData+'.'+str(gstart)+'.'+str(gdur)+'.'+SamRate+'.'+str(TimeStride)
 
 if isdir(Dir):
     print "Directory exists:", Dir
