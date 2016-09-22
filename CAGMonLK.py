@@ -71,7 +71,7 @@ RunData=opts.run_data
 dur=int(etime)-int(stime)
 
 tmpdir='tmp'
-sortlist=lisdir(tmpdir)
+sortlist=listdir(tmpdir)
 sortlist.sort()
 for i in range(len(sortlist)):
     gstart=int(sortlist[i].split('.')[1])
