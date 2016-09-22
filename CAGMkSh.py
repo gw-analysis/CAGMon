@@ -27,7 +27,7 @@ __author__ ="John J. Oh <john.oh@ligo.org>"
  
 import numpy as np
 from os import makedirs
-from os.path import isdir, exists
+from os.path import isdir, exists, isfile
 from sys import exit
 import ast
 import os, sys
@@ -35,7 +35,7 @@ import ConfigParser
 config=ConfigParser.ConfigParser()
 config.read("CAGConfig.ini")
 
-BaseDir=os.getcwd()
+BaseDir=os.getcwd()+'/'
 stime=int(config.get('Parameter','start_time'))
 etime=int(config.get('Parameter','end_time'))
 srate=int(config.get('Parameter','sampling_rate'))
@@ -91,5 +91,16 @@ else:
 CPConfig=" cp CAGConfig.ini "+tmpdir+'/CAGConfig.'+str(stime)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)+'.ini'
 os.system(CPConfig)
 print "Configuration file copied to:", tmpdir
+
+print 'Checking Auxiliary Channel List....'
+for i in range(len(chlist)):
+    if isfile(HTMLDir+'/'+chlist[i]+'.txt'):
+        print "The File Already Exists."
+        pass
+    else:
+        CpFile=" cp "+chlist[i]+" "+HTMLDir+"/"+chlist[i]+".txt"
+        os.system(CpFile)
+        print "Copying Auxiliary Channels..."
+
 print 'All Jobs Done'
 print 'Type "./'+base_tag+'.sh"'
