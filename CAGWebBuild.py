@@ -13,16 +13,17 @@ etime=str(opts.gps_end_time)
 dur=int(etime)-int(stime)
 
 tmpdir='tmp'
-for i in range(len(listdir(tmpdir))):
-    gstart=int(listdir(tmpdir)[i].split('.')[1])
-    gdur=int(listdir(tmpdir)[i].split('.')[2])
+sortlist=listdir(tmpdir)
+sortlist.sort()
+for i in range(len(sortlist)):
+    gstart=int(sortlist[i].split('.')[1])
+    gdur=int(sortlist[i].split('.')[2])
     gend=int(gstart+gdur)
-    if gstart <= stime and gend >= etime:
-        config.read(listdir(tmpdir)[i])
+    if gstart == int(stime):
+        config.read(tmpdir+'/'+sortlist[i])
+        break
     else:
         pass
-
-BaseDir=config.get('Parameter','Base_Directory')
 stime=int(config.get('Parameter','start_time'))
 etime=int(config.get('Parameter','end_time'))
 srate=config.get('Parameter','sampling_rate')
