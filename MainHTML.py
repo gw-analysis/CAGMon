@@ -18,7 +18,7 @@ class DirsList:
     def ListDirs(self, path):
         return [i for i in os.listdir(path) if os.path.isdir(os.path.join(path,i))]
 
-def CAGHeader(gps_start, gps_end, dur, srate, stride, run, Nseg, chlist):
+def CAGHeader(chlist):
     BaseDir='../public_html'
     header = """
 <html>
@@ -43,7 +43,7 @@ def CAGHeader(gps_start, gps_end, dur, srate, stride, run, Nseg, chlist):
     return filename
 
 
-def CAGBody(gps_start, dur, srate, stride, Nseg, run, chlist, filename):
+def CAGBody(filename):
     BaseDir='../public_html'
     CRDirs=DirsList().ListDirs(BaseDir)
     BodyHead="""
@@ -86,7 +86,7 @@ def CAGBody(gps_start, dur, srate, stride, Nseg, run, chlist, filename):
             f.write(bodybody)
             f.close()
 
-def CAGFoot(gps_start, dur, srate, stride, run, filename, chlist):
+def CAGFoot(filename):
     BaseDir='../public_html'
     Foot="""
 </table>
