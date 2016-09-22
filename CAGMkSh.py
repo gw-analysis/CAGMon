@@ -66,11 +66,22 @@ for chl in chlist:
         f.close()
 print 'Writing Web-builder for Result Page'
 f=open(base_tag+'.sh','a')
-f.write(" python CAGWebBuild.py\n")
+CAGWeb=" python CAGWebBuild.py -s "+str(stime)+" -e "+str(etime)
+f.write(CAGWeb+'\n')
 f.close()
 
 CMODE=" chmod a+x "+base_tag+'.sh'
 os.system(CMODE)
 
+tmpdir='tmp'
+if isdir(tmpdir):
+    pass
+else:
+    print 'Creating directory and copying configure:', tmpdir
+    makedirs(tmpdir)
+
+CPConfig=" cp CAGConfig.ini "+tmpdir+'/CAGConfig.'+str(stime)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)+'.ini'
+os.system(CPConfig)
+print "Configuration file copied to:", tmpdir
 print 'All Jobs Done'
 print 'Type "./'+base_tag+'.sh"'
