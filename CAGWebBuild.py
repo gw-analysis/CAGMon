@@ -3,7 +3,23 @@ from CAGWebUtils import *
 import ast
 import ConfigParser
 config=ConfigParser.ConfigParser()
-config.read("CAGConfig.ini")
+parser=OptionParser(usage="CAGWebBuild", version="2.0")
+parser.add_option("-s", "--gps-start-time", action="store", type="int", default="00000", help="start gps time")
+parser.add_option("-e", "--gps-end-time", action="store", type="int", default="00000", help="end gps time")
+(opts, files)=parser.parse_args()
+stime=str(opts.gps_start_time)
+etime=str(opts.gps_end_time)
+dur=int(etime)-int(stime)
+
+tmpdir='tmp'
+for i in range(len(listdir(tmpdir))):
+    gstart=int(listdir(tmpdir)[i].split('.')[1])
+    gdur=int(listdir(tmpdir)[i].split('.')[2])
+    gend=int(gstart+gdur)
+    if gstart <= stime and gend >= etime:
+        config.read(listdir(tmpdir)[i])
+    else:
+        pass
 
 BaseDir=config.get('Parameter','Base_Directory')
 stime=int(config.get('Parameter','start_time'))
