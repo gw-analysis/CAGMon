@@ -51,10 +51,6 @@ matplotlib.rcParams['text.usetex']=False
 matplotlib.rcParams['text.latex.unicode']=False
 import ConfigParser
 config=ConfigParser.ConfigParser()
-#config.read("CAGConfig.ini")
-#gstart=config.get('Parameter','start_time')
-#gend=config.get('Parameter','end_time')
-#gdur=int(gend)-int(gstart)
 
 parser=OptionParser(usage="CAGMon", version="2.0")
 parser.add_option("-s", "--gps-start-time", action="store", type="int", default="00000", help="start gps time")
