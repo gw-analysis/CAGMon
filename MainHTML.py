@@ -23,17 +23,16 @@ def CAGHeader(gps_start, gps_end, dur, srate, stride, run, Nseg, chlist):
     header = """
 <html>
 <head>                                                                                                                           
-<title>CAGMon Analysis Results</title>                                                                                                
+<title>CAGMon as a DetChar Tool</title>
 </head>                                                                                                                           
 <body color="gray">
-<h1 align="center">CAGMon Analysis Results</h1>
-<h2 align="center">-- Correlation analysis using MIC, PearsonR, and Kendall's tau coefficients</h2>
+<h1 align="center">CAGMon Project: Analysis Results</h1>
+<h3 align="center" style="italic">- Correlation analysis based Detchar Tool using MIC, PearsonR, and Kendall's tau coefficients -</h3>
 <h4 align="center">Developer: John J OH (KGWG & NIMS, South Korea) </h4>
 <h4 align="center">Contact Email: <a href="mailto:johnoh@nims.re.kr">johnoh@nims.re.kr</a></h4>
 <h4 align="center">iKAGRA Runs: 1142899217-1143446417 (1st) / 1144368017-1145606417 (2nd)</h4>
 <h4 align="center">Code: <a href="https://github.com/gw-analysis/CAGMon.git">https://github.com/gw-analysis/CAGMon.git</a></h4>
-<p align="center">This page shows the global trend of the correlation between GW channel and auxiliary channels during the analyzed time period.<br> If you click the individual figure, then you find the CMatrix and the relavent scattered plots during the time segment.</p>
-<p align="center">| DQ.Channel Info. |<a href="%s"> %s </a>|<a href="%s"> %s</a> |<a href="%s"> %s</a> |<a href="%s"> %s</a> |</p>
+<p align="center">| DQ.Channel Info. |<a href="%s"> %s </a>|<a href="%s"> %s</a> |<a href="%s.txt"> %s</a> |<a href="%s.txt"> %s</a> |</p>
 <hr>                                                                                                                              
 """
     filename ='index'
@@ -48,8 +47,21 @@ def CAGBody(gps_start, dur, srate, stride, Nseg, run, chlist, filename):
     BaseDir='../public_html'
     CRDirs=DirsList().ListDirs(BaseDir)
     BodyHead="""
-<h2>Analysis Lists:</h2>
+<h3>Project Goal</h3>
+<p> CAGMon 2.0 is an integrated tool for finding correlation between gravitational wave channel and thousands of auxiliary channels of gravitational-wave detector. It computes Pearson correlation coefficient, Kendall's tau coefficient, and Maximal Information Coefficient (MIC) between both channel data and generate channel list with high-scored correlation value. The version 2.0 uses 1) time series data segment 2) unsafe channel list for O1 3) simple summary webpage generator.</p>
+<h3>Theoretical Basis</h3>
+<h3>Software Requirement</h3>
+<li>python 2.7 >=</li>
+<li>matplotlib, numpy, scipy</li>
+<li>minepy</li>
+<li>pylal, lalsuite, glue</li>
+<h3>User's Guide</h3>
+<li>Guide for only LVC member (access limited): <a href="https://kgwg.nims.re.kr/cbcwiki/CAGMon2.0" target="_blank">Link</a></li>
+<li>User's guide for LVC and KAGRA member: <a href="https://github.com/gw-analysis/CAGMon.git">README.md@GITHUB</a></li>
 <hr>
+<h3>Analyzed Result Lists:</h3>
+<hr>
+<table>
 """
     bodyhead=BodyHead
     f=open(BaseDir+'/'+filename+'.html','a')
@@ -65,8 +77,9 @@ def CAGBody(gps_start, dur, srate, stride, Nseg, run, chlist, filename):
             pass
         else:
             Bodybody="""
+<td>
 <li><a href="%s/%s">%s</a></li>
-<br>
+</td>
 """
             bodybody=Bodybody % (CRDirs[m], subfilename, CRDirs[m])
             f=open(BaseDir+'/'+filename+'.html', 'a')
@@ -76,6 +89,7 @@ def CAGBody(gps_start, dur, srate, stride, Nseg, run, chlist, filename):
 def CAGFoot(gps_start, dur, srate, stride, run, filename, chlist):
     BaseDir='../public_html'
     Foot="""
+</table>
 </body>
 <hr>
 <p style="italic">Created by MainWebBuilder</p>
