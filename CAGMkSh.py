@@ -35,7 +35,7 @@ import ConfigParser
 config=ConfigParser.ConfigParser()
 config.read("CAGConfig.ini")
 
-BaseDir=config.get('Parameter','Base_Directory')
+BaseDir=os.getcwd()
 stime=int(config.get('Parameter','start_time'))
 etime=int(config.get('Parameter','end_time'))
 srate=int(config.get('Parameter','sampling_rate'))
@@ -51,6 +51,14 @@ if isdir(logdir):
 else:
     print "Creating directory:", logdir
     makedirs(logdir)
+
+print "Checking public_html directory..."
+HTMLDir=os.getenv("HOME")+'/public_html'
+if isdir(HTMLDir):
+    print "Directory exists:", HTMLDir
+else:
+    print "Creating Directory:", HTMLDir
+    makedirs(HTMLDir)
 
 dur=int(etime)-int(stime)
 SegTime=int(Nseg*stride)
