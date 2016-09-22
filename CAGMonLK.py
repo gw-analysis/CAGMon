@@ -71,16 +71,19 @@ RunData=opts.run_data
 dur=int(etime)-int(stime)
 
 tmpdir='tmp'
-for i in range(len(listdir(tmpdir))):
-    gstart=int(listdir(tmpdir)[i].split('.')[1])
-    gdur=int(listdir(tmpdir)[i].split('.')[2])
+sortlist=lisdir(tmpdir)
+sortlist.sort()
+for i in range(len(sortlist)):
+    gstart=int(sortlist[i].split('.')[1])
+    gdur=int(sortlist[i].split('.')[2])
     gend=int(gstart+gdur)
-    if gstart <= stime and gend >= etime:
-        config.read(listdir(tmpdir)[i])
+    if gstart <= int(stime) and gend >= int(etime):
+        config.read(tmpdir+'/'+sortlist[i])
+        break
     else:
         pass
 
-ResDir="../public_html"
+ResDir=os.getenv("HOME")+'/public_html'
 
 if isdir(ResDir):
     print "Directory exists:", ResDir
