@@ -1,5 +1,6 @@
 #!/usr/bin/env/ python
 from os import listdir
+import os
 
 class PNGList:
     from os import listdir
@@ -10,7 +11,8 @@ class PNGList:
         return self.list
 
 def CAGHeader(gps_start, gps_end, dur, srate, stride, run, Nseg, chlist):
-    BaseDir='../public_html/'+run+'.'+str(gps_start)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)
+    ResDir=os.getenv("HOME")+'/public_html'
+    BaseDir=ResDir+'/'+run+'.'+str(gps_start)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)
     header = """
 <html>
 <head>                                                                                                                           
@@ -25,7 +27,7 @@ def CAGHeader(gps_start, gps_end, dur, srate, stride, run, Nseg, chlist):
 <li>Time Stride (Each Pixel): %s (sec)</li>
 <li>Analyzed Segment (Each Figure): %s (sec)</li>
 <p>This page shows the global trend of the correlation between GW channel and auxiliary channels during the analyzed time period. If you click the individual figure, then you find the CMatrix and the relavent scattered plots during the time segment.</p>
-<p align="center">|<a href="%s.html"> %s </a>|<a href="%s.html"> %s</a> |<a href="%s.html"> %s</a> |<a href="%s.html"> %s</a> |</p>
+<p align="center">| <a href="http://seikai.icrr.u-tokyo.ac.jp/~johnoh/index.html">HOME</a> |<a href="%s.html"> %s </a>|<a href="%s.html"> %s</a> |<a href="%s.html"> %s</a> |<a href="%s.html"> %s</a> |</p>
 <hr>                                                                                                                              
 """
     for m in chlist:
@@ -36,7 +38,6 @@ def CAGHeader(gps_start, gps_end, dur, srate, stride, run, Nseg, chlist):
         mname3=filename+'.'+chlist[2].split('_')[1]
         mname4=filename+'.'+chlist[3].split('_')[1]
         heads=header % (gps_start, gps_end, dur, srate, run, stride, Nseg, mname1, chlist[0].split('_')[1], mname2, chlist[1].split('_')[1], mname3, chlist[2].split('_')[1], mname4, chlist[3].split('_')[1])
-        filename ='CAGMon.'+str(gps_start)+'-'+str(gps_end)+'.'+run+'.'+str(srate)+'.'+str(stride)
         f=open(BaseDir+'/'+filename+'.'+chname+'.html','a')
         f.write(heads)
         f.close()
@@ -44,7 +45,8 @@ def CAGHeader(gps_start, gps_end, dur, srate, stride, run, Nseg, chlist):
 
 
 def CAGBody(gps_start, dur, srate, stride, Nseg, run, chlist, filename):
-    BaseDir='../public_html/'+run+'.'+str(gps_start)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)
+    ResDir=os.getenv("HOME")+'/public_html'
+    BaseDir=ResDir+'/'+run+'.'+str(gps_start)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)
     meth=['PCC', 'MIC', 'Ktau']
     for m in chlist:
         chname=m.split('_')[1]
@@ -173,7 +175,8 @@ def CAGBody(gps_start, dur, srate, stride, Nseg, run, chlist, filename):
 def CAGFoot(gps_start, dur, srate, stride, run, filename, chlist):
     for m in chlist:
         chname=m.split('_')[1]
-        BaseDir='../public_html/'+run+'.'+str(gps_start)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)
+        ResDir=os.getenv("HOME")+'/public_html'
+        BaseDir=ResDir+'/'+run+'.'+str(gps_start)+'.'+str(dur)+'.'+str(srate)+'.'+str(stride)
         Foot="""
 </body>
 <hr>
