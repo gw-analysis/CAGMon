@@ -19,7 +19,7 @@ class DirsList:
         return [i for i in os.listdir(path) if os.path.isdir(os.path.join(path,i))]
 
 def CAGHeader(chlist):
-    BaseDir='../public_html'
+    BaseDir=os.getenv("HOME")+'/public_html'
     header = """
 <html>
 <head>                                                                                                                           
@@ -44,7 +44,7 @@ def CAGHeader(chlist):
 
 
 def CAGBody(filename):
-    BaseDir='../public_html'
+    BaseDir=os.getenv("HOME")+'/public_html'
     CRDirs=DirsList().ListDirs(BaseDir)
     BodyHead="""
 <h3>Project Goal</h3>
@@ -87,7 +87,7 @@ def CAGBody(filename):
             f.close()
 
 def CAGFoot(filename):
-    BaseDir='../public_html'
+    BaseDir=os.getenv("HOME")+'/public_html'
     Foot="""
 </table>
 </body>
